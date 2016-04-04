@@ -1,0 +1,72 @@
+<ion-side-menus enable-menu-with-back-views="true">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-content class="menu-background">
+      <ion-list>
+      <ion-item ng-if="currentUser === false" class="login-area">
+          <div class="row">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 save">
+              <span>Save all of your favorite recipes</span>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 login-buttons">
+              <a menu-close class="button button-small login-button-style" href="#/app/login2">Sign up</a><button menu-close class=" button button-small login-button-style login-button-before" ng-click="login()">Login</button>
+            </div>
+          </div>
+        </ion-item>
+        <div class="menu-divider" ng-if="currentUser === true">
+          
+        </div>
+        <a menu-close href="#/app/favorites" class="row menu-item .text-center" ng-if="currentUser === true"
+        style="text-decoration:none;">
+          <span class="menu-icon ion-ios-heart"></span><span class="menu-item-text">My Favorites</span>
+        </a>
+
+        <a menu-close href="#/app/search" class="row menu-item .text-center" style="text-decoration:none;">
+            <span class="menu-icon ion-search"></span><span class="menu-item-text"> Find a recipe
+            </span>
+        </a>
+
+        <!-- <div class="menu-item"> -->
+        <a class="row menu-item" menu-close href="#/app/categories" style="text-decoration:none;">
+          <span class="menu-icon ion-ios-book"></span><span menu-close href="#/app/categories" class="menu-item-text"> Categories
+            </span>
+        </a>
+        <!-- </div> -->
+
+        <a class="row menu-item" menu-close ng-if="currentUser === true" style="text-decoration:none;">
+            <span class="menu-icon ion-power"></span><span class="menu-item-text" ng-click="logout()"> Logout
+            </span>
+        </a>
+
+       <!--  
+        <ion-item menu-close class="menu-background" ng-click="login()" ng-if="currentUser === false">
+          <span class="ion-ios-person-outline icon-padding"></span>Login
+        </ion-item>
+        <ion-item menu-close href="#/app/search" class="menu-background">
+          <span class="ion-ios-search icon-padding"></span>Find a recipe
+        </ion-item>
+        <ion-item menu-close href="#/app/categories" class="menu-background">
+          <span class="ion-ios-book-outline icon-padding"></span>Categories
+        </ion-item>
+        <a menu-close class="button button-block button-positive" ng-click="logout()" ng-if="currentUser === true"><span class="ion-power icon-padding logout"></span>Logout</a>
+        <a menu-close class="button button-block button-positive" ng-click="showLogOutMenu()"><span class="ion-power icon-padding logout"></span>Facebook logout</a> -->
+      </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

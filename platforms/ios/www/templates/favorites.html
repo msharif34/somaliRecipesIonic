@@ -1,0 +1,18 @@
+
+ <ion-view view-title="Favorites" cache-view="false">
+  <ion-content>
+      <div ng-repeat="food in info">
+          <div ng-if="!food">
+            NO favorites
+          </div>
+            <div class="food-title">
+              {{food.Name}}
+            </div>
+        <div class="custom-card">
+          <a ng-href="#/app/categories/:foodName/{{food.Name}}">
+            <img class="category-img" ng-src="{{food.image_src}}" >
+          </a>
+        </div>
+      </div>
+ </ion-content>
+</ion-view>

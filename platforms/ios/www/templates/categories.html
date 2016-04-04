@@ -1,0 +1,20 @@
+<ion-view view-title="Categories" hide-back-button="true">
+  <ion-content>
+  <a href="#/app/favorites" ng-if="currentUser === true">
+  	<div class="category-title">
+  		My Favorites
+  	</div>
+  	<div class="custom-card">
+  		<img class="category-img" ng-src="{{favoritesImg}}">
+  	</div>
+  </a>
+      <a ng-repeat="food in categories | unique: 'Category'" href="#/app/categories/{{food.Category}}" class="animate fadeInDown">
+            <div class="category-title">
+              {{food.Category}}
+            </div>
+        <div class="custom-card">
+            <img class="category-img" image-lazy-src="{{food.CategoryImg}}" image-lazy-background-image="true" image-lazy-loader="lines" image-lazy-distance-from-bottom-to-load="100">
+        </div>
+      </a>
+ </ion-content>
+</ion-view>

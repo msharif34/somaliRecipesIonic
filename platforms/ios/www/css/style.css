@@ -1,0 +1,200 @@
+.category-img{
+	height: 195px;
+	width: 100%;
+	border-top: 0.5px solid white;
+	border-bottom: 0.5px solid white;
+}
+
+.category-title{
+	position: absolute;
+	color: #fff;
+	font:normal 15pt Arial;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+.food-title{
+	position: absolute;
+	color: #fff;
+	font:normal 10pt Arial;
+	margin-top: 10px;
+	margin-left: 10px;
+	text-shadow: 2px 2px #000;
+}
+
+.food-img{
+	width: 100%;
+	height: 150px;
+}
+
+.favorite{
+	float: right;
+	font-size: 30px;
+	margin-left: 10px;
+}
+
+.custom-card{
+	height: 195px;
+	width: 100%;
+}
+.ion-ios-heart{
+	color: #4187DA;
+}
+
+.food{
+	color: #fff;
+}
+
+.ion-ios-heart-outline{
+	color: #4187DA;
+}
+
+.like{
+	position: absolute;
+	float: right;
+	font-size: 30px;
+	right: 0px;
+	margin-top: 10px;
+	margin-right: 10px;
+}
+
+.login-container {
+    display: -webkit-flex;
+    -webkit-flex-direction: column;
+    height: 100%;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#efad62), color-stop(100%,#f7d47c));
+    background: -webkit-linear-gradient(top, #efad62 0%,#f7d47c 100%);
+}
+
+.login-container > .button-row img {
+    max-width: 80%;
+}
+
+.login-container > .header {
+    -webkit-flex: 4;
+    padding-top: 20px;
+}
+
+.form-container{
+	margin: 0px 20px;
+	vertical-align: bottom;
+}
+
+.home-background{
+	height: auto;
+	width: auto;
+	background-color: #60D3B0;
+}
+
+.logo-container{
+	height: 200px;
+	width: 100px;
+}
+
+.logo img{
+	height: 150px;
+	width: 150px;
+	margin: 40px 100px;
+}
+
+.title{
+	margin-top: 25px;
+    overflow:hidden;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.title span{
+	font-size: 36px;
+	color: #58595A;
+	display:table;
+	margin:0 auto;
+}
+
+.facebook-sign-in{
+	background-color: #3B5998;
+	color: #fff;
+}
+
+.menu-header{
+	height: 100px;
+	width: 100%;
+}
+
+.menu-content{
+	display:table;
+	margin: 0 auto;
+	font-size: 14px;
+}
+.icon-padding{
+	margin-right: 10px;
+	color: #0C60EE;
+}
+.logout{
+	color: white;
+}
+.title{
+	color: white;
+}
+
+.menu-background{
+	background-color: #349798;
+}
+
+.login-area{
+	height: 110px; 
+	background-color: white;
+}
+
+.login-buttons{
+	display:table;
+	margin:0 auto;
+	padding-top: 10px;
+}
+
+.login-button-style{
+	width: 100px;
+	color: #349798;
+	border: 1px solid black;
+}
+
+.login-button-before{
+	margin-left: 5px;
+}
+
+.menu-header{
+	background-color: white;
+	height: auto;
+}
+.save{
+	margin-top: 10px;
+}
+.nav-holder{
+	height: auto;
+	width: auto;
+}
+
+.menu-item{
+	min-height: 20px;
+	width: 100%;
+	background: transparent;
+}
+
+.menu-icon{
+	margin: 10px;
+	color: white;
+	font-size: 20px;
+}
+
+.menu-item-text{
+	font-size: 18px;
+	width: 100%;
+	color: #fff;
+	margin-top: 10px;
+}
+
+.menu-divider{
+	background: transparent;
+	height: 40px;
+	width: 100%;
+}
