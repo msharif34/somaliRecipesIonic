@@ -1,0 +1,23 @@
+<ion-view view-title="Search">
+
+<ion-nav-buttons side="secondary">
+<button class="button button-icon icon ion-ios-search-strong" ng-click="showFilterBar()">
+</button>
+</ion-nav-buttons>
+
+<ion-content direction="y" scrollbar-y="false">
+
+<ion-refresher pulling-icon="ion-arrow-down-b" on-refresh="refreshItems()">
+</ion-refresher>
+<div class="card" collection-repeat="item in names">
+	<a ng-href="#/app/categories/:foodName/{{item}}" class="item item-text-wrap">
+		{{item}}
+	</a>
+</div>
+<div ng-if="foodTest !== undefined && !foodTest.length" class="no-results">
+	<p>No Results</p>
+</div>
+
+</ion-content>
+
+</ion-view>
