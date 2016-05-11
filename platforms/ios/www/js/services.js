@@ -71,8 +71,8 @@ angular.module('services', [])
 			               $window.localStorage.userId = userresponse.uid;
 			                     $http({
 					                  method: 'POST',
-					                  url: 'http://localhost:3000/users/create',
-					                  // url: 'https://somali-recipes.herokuapp.com/users/create',
+					                  // url: 'http://localhost:3000/users/create',
+					                  url: 'https://somali-recipes.herokuapp.com/users/create',
 					                  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
 					                  transformRequest: function(obj) {
 					                      var str = [];
@@ -110,8 +110,8 @@ angular.module('services', [])
 		return $http({
 		  method: 'GET',
 		  // url: 'recipes.json',
-		  // url: 'https://somali-recipes.herokuapp.com/recipes',
-		  url: 'http://localhost:3000/recipes',
+		  url: 'https://somali-recipes.herokuapp.com/recipes',
+		  // url: 'http://localhost:3000/recipes',
 		  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 		}).success(function(response) {
 			$ionicLoading.hide();
@@ -121,9 +121,6 @@ angular.module('services', [])
 		    // called asynchronously if an error occurs
 		    // or server returns response with an error status.
 		  });  
-		    },
-		    login: function(){
-		    	$state.go('app.categories');
 		    }
 		}
 

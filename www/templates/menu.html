@@ -13,7 +13,7 @@
   </ion-side-menu-content>
 
   <ion-side-menu side="left">
-    <ion-content class="menu-background">
+    <ion-content class="menu-background" scroll="false">
       <ion-list>
       <ion-item ng-if="currentUser === false" class="login-area">
           <div class="row">
@@ -53,19 +53,6 @@
             <span class="menu-icon ion-power"></span><span class="menu-item-text" ng-click="logout()"> Logout
             </span>
         </a>
-
-       <!--  
-        <ion-item menu-close class="menu-background" ng-click="login()" ng-if="currentUser === false">
-          <span class="ion-ios-person-outline icon-padding"></span>Login
-        </ion-item>
-        <ion-item menu-close href="#/app/search" class="menu-background">
-          <span class="ion-ios-search icon-padding"></span>Find a recipe
-        </ion-item>
-        <ion-item menu-close href="#/app/categories" class="menu-background">
-          <span class="ion-ios-book-outline icon-padding"></span>Categories
-        </ion-item>
-        <a menu-close class="button button-block button-positive" ng-click="logout()" ng-if="currentUser === true"><span class="ion-power icon-padding logout"></span>Logout</a>
-        <a menu-close class="button button-block button-positive" ng-click="showLogOutMenu()"><span class="ion-power icon-padding logout"></span>Facebook logout</a> -->
       </ion-list>
     </ion-content>
   </ion-side-menu>

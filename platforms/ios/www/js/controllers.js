@@ -11,19 +11,16 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
       $scope.currentAccount = 'email'
     } else {
       console.log("Client unauthenticated.")
-      $scope.currentUser = false;
     }
   });
 
-  if($window.localStorage.currentAccount === 'null'){
-    console.log('no user logged in')
+  if($window.localStorage.currentAccount === 'facebook' || 'firebase'){
+      $scope.currentUser = true;
+  }else{
     $scope.currentUser = false;
-  }else if($window.localStorage.currentAccount === 'facebook' || 'firebase'){
-    console.log('Current user online is: ' + $window.localStorage.currentAccount )
-    $scope.currentUser = true;
   }
 
-  console.log("Current Account is: " + $window.localStorage.currentAccount)
+  console.log("Current Account is ------ : " + $window.localStorage.currentAccount)
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -86,9 +83,6 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
     $state.go('app.login')
   };
   $scope.logout = function() {
-        $ionicLoading.show({
-          template: 'Logging out...'
-        });
         $ionicSideMenuDelegate.toggleLeft();
         if($window.localStorage.currentAccount === 'firebase'){
               User.logout();
@@ -96,10 +90,12 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
                       $ionicLoading.hide();
                       $state.go('app.categories');
                       $window.localStorage.currentAccount = null
-                      // $window.location.reload(true)
+                      $window.localStorage.token = null;
+                      $scope.currentUser = false;
                       $ionicLoading.hide();
                     }, 1000);
-        }else{
+        }else if($window.localStorage.currentAccount === 'facebook'){
+            $scope.currentUser = false;
             $timeout(function() {
                       $ionicLoading.show({
                         template: 'Logging out...',
@@ -109,10 +105,11 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
           facebookConnectPlugin.logout(function(info){
             $ionicLoading.hide();
             console.log(info)
-            $window.localStorage.currentAccount = null;
-            $scope.currentUser = false;
+            $window.localStorage.currentAccount = null
             $window.localStorage.token = null;
+            $scope.currentUser = false;
             console.log('facebook logout'+ $window.localStorage.token)
+            console.log('facebook logout current User:  '+ $scope.currentUser)
             $state.go('app.categories');
           },
           function(fail){
@@ -143,8 +140,8 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
         facebookConnectPlugin.logout(function(info){
           $scope.currentUser = false;
           $window.localStorage.token = null;
-          console.log('facebook logout'+ $window.localStorage.token)
           $state.go('app.categories');
+          console.log('facebook logout'+ $window.localStorage.token)
           $ionicLoading.hide();
         },
         function(fail){
@@ -157,17 +154,9 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
 })
   
 
-.controller('CategoriesCtrl', function($scope, $timeout,$http,$window, Recipes, $rootScope, $ionicLoading) {
-  
-  $scope.$on( "$ionicView.enter", function() {
-        console.log('entered view')
-console.log('current Account is ------ ' + $window.localStorage.currentAccount)
-        if($window.localStorage.currentAccount === 'facebook'){
-          $scope.currentUser = true;
-        }
-    });
+.controller('CategoriesCtrl', function($scope, $timeout,$http,$window, $state, Recipes, $rootScope, $ionicLoading) {
+console.log('SCOPE USER: ---' + $scope.currentUser);
   $scope.foodTest = [];
-  console.log('CATEGORIES - Logged in as: ' + $window.localStorage.currentAccount)
   var test;
       $ionicLoading.show({
       template: '<ion-spinner icon="ios"></ion-spinner>',
@@ -264,8 +253,8 @@ console.log('current Account is ------ ' + $window.localStorage.currentAccount)
   }
                   $http({
                         method: 'POST',
-                        url: 'http://localhost:3000/users/favorites',
-                        // url: 'https://somali-recipes.herokuapp.com/users/favorites',
+                        // url: 'http://localhost:3000/users/favorites',
+                        url: 'https://somali-recipes.herokuapp.com/users/favorites',
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                         transformRequest: function(obj) {
                             var str = [];
@@ -295,8 +284,8 @@ $scope.likeStatus = function(food){
             if($scope.liked != false){
               $http({
                         method: 'POST',
-                        url: 'http://localhost:3000/users/add/favorites',
-                        // url: 'https://somali-recipes.herokuapp.com/users/add/favorites',
+                        // url: 'http://localhost:3000/users/add/favorites',
+                        url: 'https://somali-recipes.herokuapp.com/users/add/favorites',
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                         transformRequest: function(obj) {
                             var str = [];
@@ -311,8 +300,8 @@ $scope.likeStatus = function(food){
             }else{
               $http({
                         method: 'DELETE',
-                        url: 'http://localhost:3000/users/remove/favorites',
-                        // url: 'https://somali-recipes.herokuapp.com/users/remove/favorites',
+                        // url: 'http://localhost:3000/users/remove/favorites',
+                        url: 'https://somali-recipes.herokuapp.com/users/remove/favorites',
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                         transformRequest: function(obj) {
                             var str = [];
@@ -339,14 +328,20 @@ $scope.likeStatus = function(food){
    });
 })
 
-.controller('FavoritesCtrl', function($scope,$window,Recipes, $http) {
+.controller('FavoritesCtrl', function($scope,$window,Recipes, $ionicLoading,$http) {
   var ref = new Firebase("https://somali-food-app.firebaseio.com");
   var authData = ref.getAuth();
   var favoritesFoods = [];
   var currentAccountId;
   if($window.localStorage.currentAccount === 'firebase'){
+    $ionicLoading.show({
+          template: 'Loading favorites...'
+        });
       currentAccountId = authData.uid
   }else if($window.localStorage.currentAccount === 'facebook'){
+    $ionicLoading.show({
+          template: 'Loading favorites...'
+        });
     currentAccountId = $window.localStorage.token;
   }else{
     console.log('No User Logged in')
@@ -356,8 +351,8 @@ $scope.likeStatus = function(food){
   $scope.info = [];
      $http({
                         method: 'POST',
-                        url: 'http://localhost:3000/users/favorites/all',
-                        // url: 'https://somali-recipes.herokuapp.com/users/favorites/all',
+                        // url: 'http://localhost:3000/users/favorites/all',
+                        url: 'https://somali-recipes.herokuapp.com/users/favorites/all',
                         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                         transformRequest: function(obj) {
                             var str = [];
@@ -384,6 +379,7 @@ $scope.likeStatus = function(food){
                               }
                             }
                           }
+                          $ionicLoading.hide();
                          });
                         });
 })
@@ -397,8 +393,8 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
       return;
     }
 
-    $scope.currentUser = true;
     $window.localStorage.currentAccount = 'facebook'
+    $scope.currentUser = true;
     var authResponse = response.authResponse;
     getFacebookProfileInfo(authResponse)
     .then(function(profileInfo) {
@@ -409,8 +405,8 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
       $ionicLoading.hide();
       $http({
                             method: 'POST',
-                            url: 'http://localhost:3000/users/facebook',
-                            // url: 'https://somali-recipes.herokuapp.com/users/create',
+                            // url: 'http://localhost:3000/users/facebook',
+                            url: 'https://somali-recipes.herokuapp.com/users/facebook',
                             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                             transformRequest: function(obj) {
                                 var str = [];
@@ -420,10 +416,14 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
                             },
                             data: {firebaseId: profileInfo.email}
                             }).success(function (info) {
-                              console.log('Facebook token:' + $window.localStorage.token)
+                              console.log('Facebook token:' + $window.localStorage.token + ' and scope.user is '+ $scope.currentUser)
                               console.log(JSON.stringify(info))
                               $window.localStorage.currentAccount = 'facebook'
-                              Recipes.login();
+                              $state.go('app.categories', {}, {reload: false}).then(function(){
+                                setTimeout(function() {
+                                  $window.location.reload(true);
+                                }, 500);
+                              })
                             }, function(err){
                               console.log('ERROR: ' + err)
                             });
@@ -460,15 +460,13 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
     console.log("CLICKED!!!!!!")
     facebookConnectPlugin.getLoginStatus(function(success){
       if(success.status === 'connected'){
-        $scope.currentUser = true;
         getFacebookProfileInfo(success).then(function(data){
-          $scope.currentUser = true;
         $window.localStorage.token = data.email;
           console.log('data facebook here: ' + JSON.stringify(data))
         $http({
                             method: 'POST',
-                            url: 'http://localhost:3000/users/facebook',
-                            // url: 'https://somali-recipes.herokuapp.com/users/create',
+                            // url: 'http://localhost:3000/users/facebook',
+                            url: 'https://somali-recipes.herokuapp.com/users/facebook',
                             headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                             transformRequest: function(obj) {
                                 var str = [];
@@ -481,8 +479,12 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
                               console.log('Facebook token:' + $window.localStorage.token)
                               console.log(JSON.stringify(info))
                               $window.localStorage.currentAccount = 'facebook'
-                              Recipes.login();  
-                              // $window.location.reload(true); 
+                              $scope.currentUser = true;
+                              $state.go('app.categories', {}, {reload: false}).then(function(){
+                                setTimeout(function() {
+                                  $window.location.reload(true);
+                                }, 500);
+                              })
                             }, function(err){
                               console.log('ERROR: ' + err)
                             });
@@ -491,7 +493,7 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
         // The user is logged in and has authenticated your app, and response.authResponse supplies
         // the user's ID, a valid access token, a signed request, and the time the access token
         // and signed request each expire
-        console.log('getLoginStatus', success.status);
+        console.log('getLoginStatus ---- finally connected ---', success.status);
 
       } else {
         // If (success.status === 'not_authorized') the user is logged in to Facebook,
@@ -499,8 +501,7 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
         // Else the person is not logged into Facebook,
         // so we're not sure if they are logged into this app or not.
 
-        console.log('getLoginStatus', success.status);
-
+        console.log('getLoginStatus -- else ---', success.status);
         $ionicLoading.show({
           template: 'Logging in...'
         });

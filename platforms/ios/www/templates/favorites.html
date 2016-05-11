@@ -1,7 +1,7 @@
 
  <ion-view view-title="Favorites" cache-view="false">
   <ion-content>
-      <div ng-repeat="food in info">
+      <div ng-repeat="food in info | unique: 'Name'">
           <div ng-if="!food">
             NO favorites
           </div>
