@@ -14,7 +14,7 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
     }
   });
 
-  if($window.localStorage.currentAccount === 'facebook' || 'firebase'){
+  if($window.localStorage.currentAccount != undefined){
       $scope.currentUser = true;
   }else{
     $scope.currentUser = false;
@@ -222,7 +222,7 @@ console.log('SCOPE USER: ---' + $scope.currentUser);
   var name = $stateParams.foodDetails;
   $scope.details = [];
   console.log(name);
-  if($scope.currentUser === false){
+  if($scope.currentUser == false){
     Recipes.get().success(function(data){
     test = data;
     test.forEach(function(info){
@@ -394,7 +394,6 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
     }
 
     $window.localStorage.currentAccount = 'facebook'
-    $scope.currentUser = true;
     var authResponse = response.authResponse;
     getFacebookProfileInfo(authResponse)
     .then(function(profileInfo) {
