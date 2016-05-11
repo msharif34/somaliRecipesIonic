@@ -16,14 +16,10 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
 
   if($window.localStorage.currentAccount === 'facebook'){
       $scope.currentUser = true;
-  }else{
-    $scope.currentUser = false;
   }
 
   if($window.localStorage.currentAccount === 'firebase'){
       $scope.currentUser = true;
-  }else{
-    $scope.currentUser = false;
   }
 
   console.log("Current Account is ------ : " + $window.localStorage.currentAccount)
