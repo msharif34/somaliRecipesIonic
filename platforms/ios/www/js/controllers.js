@@ -214,7 +214,7 @@ console.log('SCOPE USER: ---' + $scope.currentUser);
    });
 })
 
-.controller('FoodDetailsCtrl', function($scope, $http, Recipes, $stateParams, $window, $rootScope, User,$ionicLoading) {
+.controller('FoodDetailsCtrl', function($scope, $http, Recipes, $stateParams, $window, $rootScope, User,$ionicLoading, $ionicModal) {
   var ref = new Firebase("https://somali-food-app.firebaseio.com");
   var authData = ref.getAuth();
   $scope.foodTest = [];
@@ -328,6 +328,31 @@ $scope.likeStatus = function(food){
           }
       }
    });
+
+    $ionicModal.fromTemplateUrl('templates/creditModal.html', {
+      scope: $scope,
+      animation: `slide-in-up`
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+$scope.showModal = function(){
+  $scope.modal.show();
+}
+    $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
 })
 
 .controller('FavoritesCtrl', function($scope,$window,Recipes, $ionicLoading,$http) {
