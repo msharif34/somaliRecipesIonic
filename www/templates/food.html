@@ -1,19 +1,6 @@
-<!-- <ion-view view-title="Food">
-  <ion-content>
-     <ion-item ng-repeat="food in info" href="#/app/categories/:foodName/{{food.Name}}">
-			<div class="card">
-			  <div class="item item-text-wrap">
-			    {{food.Name}}
-			  </div>
-			</div>
-		</ion-item>
-  </ion-content>
-</ion-view>
- -->
-
  <ion-view view-title="Food">
   <ion-content>
-      <div ng-repeat="food in info track by $index">
+      <div ng-repeat="food in info | unique: 'Name'">
             <div class="food-title">
               {{food.Name}}
             </div>
