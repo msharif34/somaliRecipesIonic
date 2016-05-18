@@ -156,8 +156,33 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
 })
   
 
-.controller('CategoriesCtrl', function($scope, $timeout,$http,$window, $state, Recipes, $rootScope, $ionicLoading) {
+.controller('CategoriesCtrl', function($scope, $ionicModal,$timeout,$http,$window, $state, Recipes, $rootScope, $ionicLoading) {
 console.log('SCOPE USER: ---' + $scope.currentUser);
+
+    $ionicModal.fromTemplateUrl('templates/creditModal.html', {
+      scope: $scope,
+      animation: `slide-in-up`
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+$scope.showModal = function(){
+  $scope.modal.show();
+}
+    $scope.closeModal = function() {
+    $scope.modal.hide();
+  };
+  //Cleanup the modal when we're done with it!
+  $scope.$on('$destroy', function() {
+    $scope.modal.remove();
+  });
+  // Execute action on hide modal
+  $scope.$on('modal.hidden', function() {
+    // Execute action
+  });
+  // Execute action on remove modal
+  $scope.$on('modal.removed', function() {
+    // Execute action
+  });
   $scope.foodTest = [];
   var test;
       $ionicLoading.show({
