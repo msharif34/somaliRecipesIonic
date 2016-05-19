@@ -194,7 +194,8 @@ console.log('SCOPE USER: ---' + $scope.currentUser);
 
 })
 
-.controller('FoodCtrl', function($scope, $stateParams,$window, Recipes, $ionicLoading) {
+.controller('FoodCtrl', function($scope, $stateParams,$window, Recipes, $http,$ionicLoading) {
+  console.log('welcome buddy')
   $scope.foodTest = [];
   var test;
   var category = $stateParams.foodName
@@ -214,7 +215,7 @@ console.log('SCOPE USER: ---' + $scope.currentUser);
    });
 })
 
-.controller('FoodDetailsCtrl', function($scope, $http, Recipes, $stateParams, $window, $rootScope, User,$ionicLoading, $ionicModal) {
+.controller('FoodDetailsCtrl', function($scope, $http, Recipes, $stateParams, $window, $rootScope, User,$ionicLoading, $ionicModal,$ionicPopup) {
   var ref = new Firebase("https://somali-food-app.firebaseio.com");
   var authData = ref.getAuth();
   $scope.foodTest = [];
@@ -240,7 +241,10 @@ console.log('SCOPE USER: ---' + $scope.currentUser);
     });
 
     $scope.likeStatus = function(food){
-      alert('Must be logged in to do that')
+      $ionicPopup.alert({
+         title: 'Don\'t eat that!',
+         template: 'It might taste good'
+       });
     }
       return  $scope.details
 
@@ -280,7 +284,10 @@ console.log('SCOPE USER: ---' + $scope.currentUser);
 $scope.likeStatus = function(food){
   console.log(currentAccountId)
       if(!currentAccountId){
-        return alert('Must be logged in to do that')
+        return $ionicPopup.confirm({
+               title: 'Must be logged in!',
+               template: 'Would you like to log in to save this recipe?'
+             });
       }else{
         $scope.liked = $scope.liked === true ? false : true;
             if($scope.liked != false){
@@ -331,7 +338,7 @@ $scope.likeStatus = function(food){
 
     $ionicModal.fromTemplateUrl('templates/creditModal.html', {
       scope: $scope,
-      animation: `slide-in-up`
+      animation: 'slide-in-up'
     }).then(function(modal) {
       $scope.modal = modal;
     });
@@ -353,6 +360,28 @@ $scope.showModal = function(){
   $scope.$on('modal.removed', function() {
     // Execute action
   });
+$scope.credits = {
+  website:{
+    link: "http://www.somalikitchen.com/",
+    class:'ion-ios-world-outline'
+  },
+  facebook:{
+    link: 'https://www.facebook.com/TheSomaliKitchen/',
+    class:'ion-social-facebook'
+  },
+  instagram:{
+    link: 'https://www.instagram.com/somalikitchen/',
+    class:'ion-social-instagram-outline'
+  },
+  google:{
+    link: 'https://plus.google.com/+AbderazzaqNoor/posts',
+    class:'ion-social-googleplus'
+  }
+}
+  $scope.openBrowser = function(link){
+    console.log(JSON.stringify(link));
+    window.open(link, "_blank", "location=no"); return false;
+  }
 })
 
 .controller('FavoritesCtrl', function($scope,$window,Recipes, $ionicLoading,$http) {

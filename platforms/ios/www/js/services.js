@@ -109,13 +109,122 @@ angular.module('services', [])
     	 // Simple GET request example:
 		return $http({
 		  method: 'GET',
-		  // url: 'recipes.json',
-		  url: 'https://somali-recipes.herokuapp.com/recipes',
+		  url: 'js/recipes.json',
+		  // url: 'https://somali-recipes.herokuapp.com/recipes',
 		  // url: 'http://localhost:3000/recipes',
 		  headers: {'Content-Type': 'application/x-www-form-urlencoded'}
-		}).success(function(response) {
+		}).success(function(data) {
 			$ionicLoading.hide();
-		    return response
+	var newData = [];
+		for(var i = 0; i < data.length; i++){
+          if(data[i].Category === "Appetizers"){
+            data[i]['CategoryImg'] = "img/appetizers.jpg"
+            data[i]['FavoritesImg'] = "img/favorites.jpg"
+            newData.push(data[i])
+          }
+
+          if(data[i].Prep_Detail){
+            data[i]['Credit'] = "The Somali Kitchen"
+            newData.push(data[i])
+          }
+
+          if(data[i].Category === "Breakfast"){
+            data[i]['CategoryImg'] = "img/breakfast.jpg"
+            data[i]['FavoritesImg'] = "img/favorites.jpg"
+            newData.push(data[i])
+          }
+
+          if(data[i].Category === "Desserts"){
+            data[i]['CategoryImg'] = "img/Desserts.jpg"
+            data[i]['FavoritesImg'] = "img/favorites.jpg"
+            newData.push(data[i])
+          }
+
+          if(data[i].Category === "Grains & Legumes"){
+            data[i]['CategoryImg'] = "img/grains.jpg"
+            data[i]['FavoritesImg'] = "img/favorites.jpg"
+            newData.push(data[i])
+          }
+
+          if(data[i].Category === "Main Courses"){
+            data[i]['CategoryImg'] = "img/main-course.jpg"
+            data[i]['FavoritesImg'] = "img/favorites.jpg"
+            newData.push(data[i])
+          }
+
+          if(data[i].Category === "Soups"){
+            data[i]['CategoryImg'] = "img/soups.jpg"
+            data[i]['FavoritesImg'] = "img/favorites.jpg"
+            newData.push(data[i])
+          }
+
+          if(data[i].Category === "Vegetables"){
+            data[i]['CategoryImg'] = "img/vegetables.jpg"
+            data[i]['FavoritesImg'] = "img/favorites.jpg"
+            newData.push(data[i])
+          }
+
+          if(data[i].Category === "Side-Dishes"){
+            data[i]['CategoryImg'] = "img/side-dishes.jpg"
+            data[i]['FavoritesImg'] = "img/favorites.jpg"
+            newData.push(data[i])
+          }
+
+          if(data[i].Category === "Bread"){
+            data[i]['CategoryImg'] = "img/bread.jpg"
+            data[i]['FavoritesImg'] = "img/favorites.jpg"
+            newData.push(data[i])
+          }
+
+          if(data[i].Category === "Meat"){
+            data[i]['CategoryImg'] = "img/Meat.jpg"
+            data[i]['FavoritesImg'] = "img/favorites.jpg"
+            newData.push(data[i])
+          }
+
+          if(data[i].Category === "Fish"){
+            data[i]['CategoryImg'] = "img/fish.jpg"
+            data[i]['FavoritesImg'] = "img/favorites.jpg"
+            newData.push(data[i])
+          }
+
+          if(data[i].Category === "Eggs"){
+            data[i]['CategoryImg'] = "img/Eggs.jpg"
+            data[i]['FavoritesImg'] = "img/favorites.jpg"
+            newData.push(data[i])
+          }
+
+          if(data[i].Category === "Featured"){
+            data[i]['CategoryImg'] = "img/Featured.jpg"
+            data[i]['FavoritesImg'] = "img/favorites.jpg"
+            newData.push(data[i])
+          }
+
+          if(data[i].Category === "Vegan"){
+            data[i]['CategoryImg'] = "img/Vegan.jpeg"
+            data[i]['FavoritesImg'] = "img/favorites.jpg"
+            newData.push(data[i])
+          }
+
+          if(data[i].Category === "Rice"){
+            data[i]['CategoryImg'] = "img/Rice.jpg"
+            data[i]['FavoritesImg'] = "img/favorites.jpg"
+            newData.push(data[i])
+          }
+
+          if(data[i].Category === "Salads"){
+            data[i]['CategoryImg'] = "img/Salads.jpg"
+            data[i]['FavoritesImg'] = "img/favorites.jpg"
+            newData.push(data[i])
+          }
+
+          if(data[i].Category === "Beverages"){
+            data[i]['CategoryImg'] = "img/beverages.jpg"
+            data[i]['FavoritesImg'] = "img/favorites.jpg"
+            newData.push(data[i])
+          }
+      }
+		    return newData
 		  }, function(error) {
 		  	console.log('ERROR HERE ------>' + JSON.stringify(error))
 		    // called asynchronously if an error occurs

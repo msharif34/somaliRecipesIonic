@@ -4,14 +4,26 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'services', 'jett.ionic.filter.bar'])
+angular.module('starter', ['ionic', 'starter.controllers', 'services', 'jett.ionic.filter.bar','ionic.ion.imageCacheFactory'])
 
-.run(function($ionicPlatform,$rootScope,$timeout,$state, $ionicLoading) {
+.run(function($ionicPlatform,$rootScope,$timeout,$state, $ionicLoading, Recipes,$ImageCacheFactory) {
   $rootScope.appReady = {status:false};
   $ionicPlatform.ready(function() {
 
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
+    //Cache all images on app load
+    Recipes.get().success(function(data){
+      var images = [];
+        for(var i = 0; i < data.length; i++){
+          images.push(data[i].image_src);
+        }
+        $ImageCacheFactory.Cache(images).then(function(info){
+            console.log("Images done loading!");
+        },function(failed){
+            console.log("An image filed: "+failed);
+        });
+    });
     if(window.cordova && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
     }
@@ -116,6 +128,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'services', 'jett.ion
       'menuContent': {
         templateUrl: 'templates/favorites.html',
         controller: 'FavoritesCtrl'
+      }
+    }
+  })
+
+  .state('app.modal', {
+    url: '/creditModal',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/creditModal.html',
+        controller: 'FoodDetailsCtrl'
       }
     }
   })
