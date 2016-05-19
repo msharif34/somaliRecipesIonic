@@ -1,8 +1,18 @@
-  <ion-modal-view class="ion-nifty-modal">
+  <ion-modal-view class="ion-nifty-modal" style="height: 35% !important;">
     <div class="ion-modal-content-custom">
       <ion-content class="padding">
-        <button class="button button-full button-positive" ng-click="closeModal()">Close Modal</button>
-        <span class="ion-social-facebook fb-icon"></span>
+      <div class="modal-header text-center">Connect with Somali Kitchen</div>
+      <div class="credit-container">
+	      <span class="{{credits.website.class}} credit-social" 
+		   ng-click="openBrowser(credits.website.link)"></span>
+		   <span class="{{credits.facebook.class}} credit-social" 
+		   ng-click="openBrowser(credits.facebook.link)"></span>
+		   <span class="{{credits.instagram.class}} credit-social" 
+		   ng-click="openBrowser(credits.instagram.link)"></span>
+		   <span class="{{credits.google.class}} credit-social" 
+		   ng-click="openBrowser(credits.google.link)"></span>
+      </div>
+        <button class="button button-full button-positive bottomaligned" ng-click="closeModal()">Close</button>
       </ion-content>
     </div>
   </ion-modal-view>

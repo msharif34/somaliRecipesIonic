@@ -1,30 +1,18 @@
-  <ion-modal-view class="ion-nifty-modal">
+  <ion-modal-view class="ion-nifty-modal" style="height: 35% !important;">
     <div class="ion-modal-content-custom">
       <ion-content class="padding">
       <div class="modal-header text-center">Connect with Somali Kitchen</div>
-      <div class="credit-container" style="padding-top:10%; padding-left:6%;">
-      <a class="ion-ios-world-outline credit-social" 
-	   ng-href="http://www.somalikitchen.com/"
-	   onclick='window.open(this.href, "_blank", "location=no"); return false;'>
-	 </a>
-	 <a class="ion-social-facebook credit-social" 
-	   ng-href="https://www.facebook.com/TheSomaliKitchen/"
-	   onclick='window.open(this.href, "_blank", "location=no"); return false;'>
-	 </a>
-	 <a class="ion-social-instagram-outline credit-social" 
-	   ng-href="https://www.instagram.com/somalikitchen/"
-	   onclick='window.open(this.href, "_blank", "location=no"); return false;'>
-	 </a>
-	 <a class="ion-social-googleplus credit-social" 
-	   ng-href="https://plus.google.com/+AbderazzaqNoor/posts"
-	   onclick='window.open(this.href, "_blank", "location=no"); return false;'>
-	 </a>
-      	<!-- <span class="ion-ios-world-outline credit-social"></span> -->
-      	<!-- <span class="ion-social-facebook credit-social"></span>
-      	<span class="ion-social-instagram-outline credit-social"></span>
-      	<span class="ion-social-googleplus credit-social"></span> -->
+      <div class="credit-container">
+	      <span class="{{credits.website.class}} credit-social" 
+		   ng-click="openBrowser(credits.website.link)"></span>
+		   <span class="{{credits.facebook.class}} credit-social" 
+		   ng-click="openBrowser(credits.facebook.link)"></span>
+		   <span class="{{credits.instagram.class}} credit-social" 
+		   ng-click="openBrowser(credits.instagram.link)"></span>
+		   <span class="{{credits.google.class}} credit-social" 
+		   ng-click="openBrowser(credits.google.link)"></span>
       </div>
-        <button class="button button-full button-positive" ng-click="closeModal()">Close</button>
+        <button class="button button-full button-positive bottomaligned" ng-click="closeModal()">Close</button>
       </ion-content>
     </div>
   </ion-modal-view>

@@ -120,6 +120,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'services', 'jett.ion
     }
   })
 
+  .state('app.modal', {
+    url: '/creditModal',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/creditModal.html',
+        controller: 'FoodDetailsCtrl'
+      }
+    }
+  })
+
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/categories');
