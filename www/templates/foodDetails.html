@@ -4,7 +4,7 @@
 		<div class="list card animate tada">
 			<div class="item item-avatar">
 			    <img src="img/foodicon2.png">
-			    <div id="like" class="favorite" ng-class="{'icon ion-ios-heart': liked === true, 'icon ion-ios-heart-outline': liked === false}" ng-click="likeStatus(food.Name)"></div>
+			    <div id="like" class="favorite confirm_selection" ng-class="{'icon ion-ios-heart': liked === true, 'icon ion-ios-heart-outline': liked === false}" ng-click="likeStatus(food.Name)"></div>
 			    <h2>{{food.Name}}</h2>
 			    <p>Category: {{food.Category}}</p>
 			    <div ng-if="food.Credit">
