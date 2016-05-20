@@ -327,7 +327,9 @@ $scope.likeStatus = function(food){
         if($scope.foods[i].Name === name){
           category = $scope.foods[i].Category
           $scope.details.push($scope.foods[i])
-          // console.log(JSON.stringify($rootScope.foods[i]));
+          }
+          if($scope.foods[i].Category == category){
+            $scope.suggestedFoods.push($scope.foods[i]);
           }
 
       }
