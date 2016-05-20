@@ -14,12 +14,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'services', 'jett.ion
     // for form inputs)
     //Cache all images on app load
     Recipes.get().success(function(data){
+      $ionicLoading.show({
+        template: '<ion-spinner icon="ios"></ion-spinner>',
+        showBackdrop: false,
+        animation: 'fade-in',
+      });
       var images = [];
         for(var i = 0; i < data.length; i++){
           images.push(data[i].image_src);
         }
         $ImageCacheFactory.Cache(images).then(function(info){
             console.log("Images done loading!");
+              $ionicLoading.hide();
         },function(failed){
             console.log("An image filed: "+failed);
         });
@@ -32,7 +38,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'services', 'jett.ion
     }
   },$timeout(function() {
     $ionicLoading.hide();
-    $state.go('app.foodDetails');
+    $state.go('app.categories');
     }, 0));
 })
 
