@@ -157,11 +157,6 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
 console.log('SCOPE USER: ---' + $scope.currentUser);
   $scope.foodTest = [];
   var test;
-      $ionicLoading.show({
-      template: '<ion-spinner icon="ios"></ion-spinner>',
-      showBackdrop: false,
-      animation: 'fade-in',
-    });
    Recipes.get().success(function(data){
     test = data;
     test.forEach(function(info){
@@ -183,8 +178,6 @@ console.log('SCOPE USER: ---' + $scope.currentUser);
     })
   }
   $scope.categories = uniq(a);
-  // console.log($scope.categories)
-  $ionicLoading.hide();
    }, function(error){
     console.log(error)
    });
@@ -215,11 +208,9 @@ console.log('SCOPE USER: ---' + $scope.currentUser);
 .controller('FoodDetailsCtrl', function($scope, $http, Recipes, $stateParams, $window, $rootScope, User,$ionicLoading, $ionicModal,$ionicPopup) {
   var ref = new Firebase("https://somali-food-app.firebaseio.com");
   var authData = ref.getAuth();
-  $scope.things = [];
-  for (var i = 0; i < 10000; i++) {
-    $scope.things.push(i)
-  }
+  var category;
   $scope.foodTest = [];
+  $scope.suggestedFoods = [];
   $scope.liked = false;
   var currentAccountId;
   currentAccountId = $window.localStorage.currentAccount;
@@ -235,10 +226,13 @@ console.log('SCOPE USER: ---' + $scope.currentUser);
     $scope.foods = $scope.foodTest
        for(var i = 0; i < $scope.foods.length; i++){
         if($scope.foods[i].Name === name){
+          category = $scope.foods[i].Category
           $scope.details.push($scope.foods[i])
           }
+          if($scope.foods[i].Category == category){
+            $scope.suggestedFoods.push($scope.foods[i]);
+          }
       }
-          console.log(JSON.stringify($scope.details));
     });
 
     $scope.likeStatus = function(food){
@@ -331,12 +325,13 @@ $scope.likeStatus = function(food){
   }
          for(var i = 0; i < $scope.foods.length; i++){
         if($scope.foods[i].Name === name){
+          category = $scope.foods[i].Category
           $scope.details.push($scope.foods[i])
           // console.log(JSON.stringify($rootScope.foods[i]));
           }
+
       }
    });
-
     $ionicModal.fromTemplateUrl('templates/creditModal.html', {
       scope: $scope,
       animation: 'slide-in-up'
