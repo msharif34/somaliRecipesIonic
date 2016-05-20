@@ -1,8 +1,8 @@
 <ion-view view-title="FoodDetails">
   <ion-content>
      <!-- <ion-item ng-repeat="food in details"> -->
-		<div class="list card animate tada" ng-repeat="food in details|limitTo:1">
-			 <div class="item item-avatar">
+		<div class="list card animate tada">
+<!-- 			<div class="item item-avatar">
 			    <img src="img/foodicon2.png">
 			    <div id="like" class="favorite" ng-class="{'icon ion-ios-heart': liked === true, 'icon ion-ios-heart-outline': liked === false}" ng-click="likeStatus(food.Name)"></div>
 			    <h2>{{food.Name}}</h2>
@@ -19,7 +19,10 @@
 			    <p>{{food.Ingredients}}</p>
 			    <h3>Instructions:</h3>
 			    <p>{{food.Instructions}}</p>
-			</div>
-			</div>
+			</div> -->
+<hscroller>
+    <hcard ng-repeat="thing in things" index="{{$index}}" desc="{{item.desc}}" image="{{item.image}}"></hcard>
+</hscroller>
+		<!-- </div> -->
   </ion-content>
 </ion-view>

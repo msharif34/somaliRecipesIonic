@@ -16,10 +16,10 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
 
   if($window.localStorage.currentAccount === 'facebook'){
       $scope.currentUser = true;
-  }
-
-  if($window.localStorage.currentAccount === 'firebase'){
+  }else if($window.localStorage.currentAccount === 'firebase'){
       $scope.currentUser = true;
+  }else{
+    $scope.currentUser = false;
   }
 
   console.log("Current Account is ------ : " + $window.localStorage.currentAccount)
@@ -85,11 +85,14 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
     $state.go('app.login')
   };
   $scope.logout = function() {
+                          $ionicLoading.show({
+                        template: 'Logging out...',
+                        duration: 1000
+                      });
         $ionicSideMenuDelegate.toggleLeft();
         if($window.localStorage.currentAccount === 'firebase'){
               User.logout();
               $timeout(function() {
-                      $ionicLoading.hide();
                       $state.go('app.categories');
                       $window.localStorage.currentAccount = null
                       $window.localStorage.token = null;
@@ -98,12 +101,6 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
                     }, 1000);
         }else if($window.localStorage.currentAccount === 'facebook'){
             $scope.currentUser = false;
-            $timeout(function() {
-                      $ionicLoading.show({
-                        template: 'Logging out...',
-                        duration: 1000
-                      });
-                    }, 100);
           facebookConnectPlugin.logout(function(info){
             $ionicLoading.hide();
             console.log(info)
@@ -218,6 +215,10 @@ console.log('SCOPE USER: ---' + $scope.currentUser);
 .controller('FoodDetailsCtrl', function($scope, $http, Recipes, $stateParams, $window, $rootScope, User,$ionicLoading, $ionicModal,$ionicPopup) {
   var ref = new Firebase("https://somali-food-app.firebaseio.com");
   var authData = ref.getAuth();
+  $scope.things = [];
+  for (var i = 0; i < 10000; i++) {
+    $scope.things.push(i)
+  }
   $scope.foodTest = [];
   $scope.liked = false;
   var currentAccountId;
