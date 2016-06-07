@@ -237,8 +237,8 @@ console.log('SCOPE USER: ---' + $scope.currentUser);
 
     $scope.likeStatus = function(food){
       $ionicPopup.alert({
-         title: 'Don\'t eat that!',
-         template: 'It might taste good'
+         title: 'Unknown user!',
+         template: 'Please create an account to save this recipe.',
        });
     }
       return  $scope.details

@@ -198,3 +198,12 @@
 	height: 40px;
 	width: 100%;
 }
+.confirm_selection {
+    -webkit-animation: glow .9s infinite alternate;
+}
+
+@-webkit-keyframes glow {
+    to {
+        text-shadow: 0 0 10px #4187DA;
+    }
+}
