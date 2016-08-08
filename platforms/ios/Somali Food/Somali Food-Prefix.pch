@@ -17,7 +17,7 @@
  under the License.
  */
 //
-// Prefix header for all source files of the 'myApp' target in the 'myApp' project
+// Prefix header for all source files of the 'Somali Food' target in the 'Somali Food' project
 //
 
 #ifdef __OBJC__

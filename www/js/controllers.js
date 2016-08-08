@@ -511,6 +511,9 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
   //This method is executed when the user press the "Login with facebook" button
   $scope.facebookSignIn = function() {
     console.log("CLICKED!!!!!!")
+    $ionicLoading.show({
+          template: 'Logging in...'
+        });
     facebookConnectPlugin.getLoginStatus(function(success){
       if(success.status === 'connected'){
         getFacebookProfileInfo(success).then(function(data){
@@ -538,6 +541,7 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
                                   $window.location.reload(true);
                                 }, 500);
                               })
+                              $ionicLoading.hide();
                             }, function(err){
                               console.log('ERROR: ' + err)
                             });
