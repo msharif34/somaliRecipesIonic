@@ -34,5 +34,9 @@
             "PACKAGE_NAME": "com.ionicframework.somalifoodapp"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "ionic-plugin-deploy": {
+            "PACKAGE_NAME": "com.ionicframework.somalifoodapp"
+        }
+    }
 }

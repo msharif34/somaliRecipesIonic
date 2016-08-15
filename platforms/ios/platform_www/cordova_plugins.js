@@ -65,6 +65,14 @@ module.exports = [
             "cordova.plugins.Keyboard"
         ],
         "runs": true
+    },
+    {
+        "id": "ionic-plugin-deploy.IonicDeploy",
+        "file": "plugins/ionic-plugin-deploy/www/ionicdeploy.js",
+        "pluginId": "ionic-plugin-deploy",
+        "clobbers": [
+            "IonicDeploy"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -77,7 +85,8 @@ module.exports.metadata =
     "cordova-plugin-splashscreen": "3.2.0",
     "cordova-plugin-statusbar": "2.1.1",
     "cordova-plugin-whitelist": "1.2.1",
-    "ionic-plugin-keyboard": "1.0.8"
+    "ionic-plugin-keyboard": "1.0.8",
+    "ionic-plugin-deploy": "0.5.7"
 };
 // BOTTOM OF METADATA
 });

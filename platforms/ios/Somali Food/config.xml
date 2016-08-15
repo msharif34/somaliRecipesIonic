@@ -45,6 +45,9 @@
     <feature name="Keyboard">
         <param name="ios-package" onload="true" value="IonicKeyboard" />
     </feature>
+    <feature name="IonicDeploy">
+        <param name="ios-package" onload="true" value="IonicDeploy" />
+    </feature>
     <name>Somali Food</name>
     <description>
         An Ionic Framework and Cordova project.
@@ -52,7 +55,7 @@
     <author email="you@example.com" href="http://example.com.com/">
       Your Name Here
     </author>
-    <content original-src="index.html" src="http://10.105.249.158:8100" />
+    <content original-src="index.html" src="http://10.105.248.150:8100" />
     <access origin="*" />
     <allow-navigation href="http://*/*" />
     <icon src="resources/ios/icon/icon-small@3x.png" />

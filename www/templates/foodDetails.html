@@ -9,7 +9,7 @@
 			    <p>Category: {{food.Category}}</p>
 			    <div ng-if="food.Credit">
 			    	<p>Credit: {{food.Credit}}</p>	
-			    	<button class="button button-small button-calm button-block" ng-click="modal.show()">Connect with the Somali Kitchen!</button>
+			    	<button class="button button-small button-calm button-block" ng-click="showModal()">Connect with the Somali Kitchen!</button>
 			    </div>
 			  </div>
 			<div class="item item-body">
@@ -18,7 +18,7 @@
 			    <h3>Ingredients:</h3>
 			    <p>{{food.Ingredients}}</p>
 			    <h3>Instructions:</h3>
-			    <p>{{food.Instructions}}</p>
+			    <p>{{food.Instructions}}</p> 
 			</div>
 		</div>
 		<div style="padding-left:2%;">Suggested Recipes:</div>

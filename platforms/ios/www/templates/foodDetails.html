@@ -1,4 +1,4 @@
-<ion-view view-title="FoodDetails">
+<ion-view view-title="food">
   <ion-content>
      <ion-item ng-repeat="food in details| limitTo : 1">
 		<div class="list card animate tada">
@@ -9,7 +9,7 @@
 			    <p>Category: {{food.Category}}</p>
 			    <div ng-if="food.Credit">
 			    	<p>Credit: {{food.Credit}}</p>	
-			    	<button class="button button-small button-calm button-block" ng-click="modal.show()">Connect with the Somali Kitchen!</button>
+			    	<button class="button button-small button-calm button-block" ng-click="showModal()">Connect with the Somali Kitchen!</button>
 			    </div>
 			  </div>
 			<div class="item item-body">
@@ -18,15 +18,16 @@
 			    <h3>Ingredients:</h3>
 			    <p>{{food.Ingredients}}</p>
 			    <h3>Instructions:</h3>
-			    <p>{{food.Instructions}}</p>
+			    <p>{{food.Instructions}}</p> 
 			</div>
 		</div>
-		<div style="padding-left:5%;">Suggested Recipes:</div>
+		<div style="padding-left:2%;">Suggested Recipes:</div>
 		  <ion-scroll direction="x" class="wide-as-needed">
 		    <div class="row">
 		        <div class="col col-25 text-center" ng-repeat="info in suggestedFoods">
 		        <a ng-href="#/app/categories/:foodName/{{info.Name}}">
-		        	<img ng-src="{{info.image_src}}" width="100%" height="100%" />
+		        	<img ng-src="{{info.image_src}}" width="100%" height="50px" />
+		        	<p>{{info.name}}</p>
 		        </a>  
 		        </div>
 		    </div>

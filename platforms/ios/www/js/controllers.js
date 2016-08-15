@@ -340,9 +340,9 @@ $scope.likeStatus = function(food){
     }).then(function(modal) {
       $scope.modal = modal;
     });
-$scope.showModal = function(){
-  $scope.modal.show();
-}
+    $scope.showModal = function(){
+      $scope.modal.show();
+    }
     $scope.closeModal = function() {
     $scope.modal.hide();
   };
@@ -454,8 +454,7 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
       console.log(profileInfo)
     $window.localStorage.token = profileInfo.email
     $scope.currentUser = true;
-      // For the purpose of this example I will store user data on local storage
-      $ionicLoading.hide();
+      
       $http({
                             method: 'POST',
                             // url: 'http://localhost:3000/users/facebook',
@@ -472,10 +471,11 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
                               console.log('Facebook token:' + $window.localStorage.token + ' and scope.user is '+ $scope.currentUser)
                               console.log(JSON.stringify(info))
                               $window.localStorage.currentAccount = 'facebook'
-                              $state.go('app.categories', {}, {reload: false}).then(function(){
+                              $state.go('app.categories', {}, {reload: true}).then(function(){
                                 setTimeout(function() {
                                   $window.location.reload(true);
-                                }, 500);
+                                }, 100);
+                                $ionicLoading.hide();
                               })
                             }, function(err){
                               console.log('ERROR: ' + err)
@@ -511,6 +511,9 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
   //This method is executed when the user press the "Login with facebook" button
   $scope.facebookSignIn = function() {
     console.log("CLICKED!!!!!!")
+    $ionicLoading.show({
+          template: 'Logging in...'
+        });
     facebookConnectPlugin.getLoginStatus(function(success){
       if(success.status === 'connected'){
         getFacebookProfileInfo(success).then(function(data){
@@ -536,7 +539,8 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
                               $state.go('app.categories', {}, {reload: false}).then(function(){
                                 setTimeout(function() {
                                   $window.location.reload(true);
-                                }, 500);
+                                }, 100);
+                              $ionicLoading.hide();
                               })
                             }, function(err){
                               console.log('ERROR: ' + err)
