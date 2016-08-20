@@ -9,7 +9,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'services', 'jett.ion
 .run(function($ionicPlatform,$rootScope,$timeout,$state, $ionicLoading, Recipes,$ImageCacheFactory) {
   $rootScope.appReady = {status:false};
   $ionicPlatform.ready(function() {
-
+    var deploy = new Ionic.Deploy();
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     //Cache all images on app load

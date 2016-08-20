@@ -16,13 +16,13 @@ angular.module('services', [])
   };
 })
 
-.factory('User', function($ionicLoading, $state, $rootScope, $http, $timeout, $window, $ionicPopup){
+.factory('User', function($ionicLoading, $state, $rootScope, $http, $timeout, $window, $ionicPopup, $q){
   var ref = new Firebase("https://somali-food-app.firebaseio.com");
   var usersRef = ref.child("users");
   var authData = ref.getAuth();
   var response;
   return {
-            login: function (email, password,callback){
+            login: function (email, password){
             	      function authHandler(error, authresponse) {
             	      	 $ionicLoading.show({
 					          template: '<ion-spinner icon="ios"></ion-spinner>'
@@ -54,55 +54,51 @@ angular.module('services', [])
            		console.log(' -----You have been logged out----');
 
             },
-            create: function(email, password, password2){
-			    var isNewUser = true;
-			    if(password != password2){                
-            return $ionicPopup.alert({
-                   title: 'Sign up error',
-                   template: 'Passwords do not match, please try again.'
-                  });
-			    }else{
-			      ref.createUser({
-			      email    : email,
-			      password : password
-			      }, function(error, userresponse) {
-			        if (error) {
-
-			          console.log("Error creating user:", JSON.stringify(error.code));
-                return $ionicPopup.alert({
-                   title: 'Sign up error',
-                   template: 'Error creating user, please try again.'
-                  });
-			        }else {
-			          console.log("Successfully created user account with uid:", userresponse.uid);
-			          console.log(JSON.stringify(userresponse));
-			               $window.localStorage.userId = userresponse.uid;
-			                     $http({
-					                  method: 'POST',
-					                  // url: 'http://localhost:3000/users/create',
-					                  url: 'https://somali-recipes.herokuapp.com/users/create',
-					                  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-					                  transformRequest: function(obj) {
-					                      var str = [];
-					                      for(var p in obj)
-					                      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-					                      return str.join("&");
-					                  },
-					                  data: {email: email, firebaseId: $window.localStorage.userId}
-					                  }).success(function (info) {  
-					                    console.log(JSON.stringify(info))
-                              $timeout(function() {
-                                User.login(email, password)
-                                $scope.closeSignup();
-                              }, 1000);
-					                  }, function(error){
-                              console.log('An error occurred creating the user', error)
-                            });
-			        }
-			      });
-			    }
-			  
-            },
+            create: function(email, password, password2, callback){
+      			    var isNewUser = true;
+      			    if(password != password2){                
+                  return $ionicPopup.alert({
+                         title: 'Sign up error',
+                         template: 'Passwords do not match, please try again.'
+                        });
+      			    }else{
+      			      ref.createUser({
+      			      email    : email,
+      			      password : password
+      			      }, function(error, userresponse) {
+      			        if (error) {
+      			          console.log("Error creating user:", JSON.stringify(error.code));
+                      return $ionicPopup.alert({
+                         title: 'Sign up error',
+                         template: 'Error creating user, please try again.'
+                        });
+      			        }else {
+      			          console.log("Successfully created user account with uid:", userresponse.uid);
+      			          console.log(JSON.stringify(userresponse));
+                      callback(userresponse)
+      			               $window.localStorage.userId = userresponse.uid;
+      			                     $http({
+      					                  method: 'POST',
+      					                  // url: 'http://localhost:3000/users/create',
+      					                  url: 'https://somali-recipes.herokuapp.com/users/create',
+      					                  headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      					                  transformRequest: function(obj) {
+      					                      var str = [];
+      					                      for(var p in obj)
+      					                      str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+      					                      return str.join("&");
+      					                  },
+      					                  data: {email: email, firebaseId: $window.localStorage.userId}
+      					                  }).success(function (info) {  
+      					                    console.log('WE HIT IT: ', JSON.stringify(info))
+      					                  }, function(error){
+                                    console.log('An error occurred creating the user', error)
+                                  });
+      			        }
+      			      });
+      			    }
+      			  
+                  },
 
             addFavorite: function(food){
             	// console.log(JSON.stringify(food))

@@ -30,13 +30,12 @@
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.ionicframework.somalifoodapp"
         },
+        "ionic-plugin-deploy": {
+            "PACKAGE_NAME": "com.ionicframework.somalifoodapp"
+        },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.somalifoodapp"
         }
     },
-    "dependent_plugins": {
-        "ionic-plugin-deploy": {
-            "PACKAGE_NAME": "com.ionicframework.somalifoodapp"
-        }
-    }
+    "dependent_plugins": {}
 }
