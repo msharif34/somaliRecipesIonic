@@ -414,7 +414,6 @@ $scope.credits = {
                         data: {firebaseId: currentAccountId}
                         }).success(function (serverInfo) {
                             if(serverInfo == ''){$scope.noFavorites = true};
-                          console.log('serverInfo', serverInfo)
                           serverInfo.forEach(function(data){
                             favoritesFoods.push(data.foodName)
                           }, function(err){
