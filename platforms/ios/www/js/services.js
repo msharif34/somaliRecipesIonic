@@ -31,8 +31,8 @@ angular.module('services', [])
 					      console.log("Login Failed!", error);
 					      $ionicLoading.hide();
 					      $ionicPopup.alert({
-						     title: 'Login error!',
-						     template: 'Please try again'
+						     title: 'Login error',
+						     template: 'Incorrect email or password, please try again.'
 						   });
 					    } else {
 					      console.log("Authenticated successfully with payload:", authresponse);     
@@ -54,18 +54,26 @@ angular.module('services', [])
            		console.log(' -----You have been logged out----');
 
             },
-            create: function(email, password, password2, callback){
+            create: function(email, password, password2){
 			    var isNewUser = true;
-			    if(password != password2){
-			      alert('Passwords do not match')
+			    if(password != password2){                
+            return $ionicPopup.alert({
+                   title: 'Sign up error',
+                   template: 'Passwords do not match, please try again.'
+                  });
 			    }else{
 			      ref.createUser({
 			      email    : email,
 			      password : password
 			      }, function(error, userresponse) {
 			        if (error) {
-			          console.log("Error creating user:", JSON.stringify(error));
-			        } else {
+
+			          console.log("Error creating user:", JSON.stringify(error.code));
+                return $ionicPopup.alert({
+                   title: 'Sign up error',
+                   template: 'Error creating user, please try again.'
+                  });
+			        }else {
 			          console.log("Successfully created user account with uid:", userresponse.uid);
 			          console.log(JSON.stringify(userresponse));
 			               $window.localStorage.userId = userresponse.uid;
@@ -81,10 +89,15 @@ angular.module('services', [])
 					                      return str.join("&");
 					                  },
 					                  data: {email: email, firebaseId: $window.localStorage.userId}
-					                  }).success(function (info) {
-			          					$state.go('app.categories');        
+					                  }).success(function (info) {  
 					                    console.log(JSON.stringify(info))
-					                  });
+                              $timeout(function() {
+                                User.login(email, password)
+                                $scope.closeSignup();
+                              }, 1000);
+					                  }, function(error){
+                              console.log('An error occurred creating the user', error)
+                            });
 			        }
 			      });
 			    }

@@ -42,12 +42,8 @@ var ref = new Firebase("https://somali-food-app.firebaseio.com");
   }
 
   $scope.createUser = function(email, password, password2){
-    User.create(email, password, password2)
-    $timeout(function() {
-            User.login(email, password)
-            $scope.closeSignup();
-            $state.go('app.categories');        
-          }, 1000);
+    User.create(email, password, password2);
+    
   }
 
   $scope.loginData = {};

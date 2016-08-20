@@ -22,6 +22,10 @@
 	text-shadow: 2px 2px #000;
 }
 
+.foodName{
+	white-space: pre-wrap;
+}
+
 .food-img{
 	width: 100%;
 	height: 150px;

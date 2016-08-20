@@ -5,7 +5,7 @@
 			<div class="item item-avatar">
 			    <img src="img/foodicon2.png">
 			    <div id="like" class="favorite" ng-class="{'icon ion-ios-heart': liked === true, 'icon ion-ios-heart-outline confirm_selection': liked === false}" ng-click="likeStatus(food.Name)"></div>
-			    <h2>{{food.Name}}</h2>
+			    <h2 class="foodName">{{food.Name}}</h2>
 			    <p>Category: {{food.Category}}</p>
 			    <div ng-if="food.Credit">
 			    	<p>Credit: {{food.Credit}}</p>	
