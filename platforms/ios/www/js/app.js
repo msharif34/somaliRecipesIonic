@@ -9,7 +9,32 @@ angular.module('starter', ['ionic', 'starter.controllers', 'services', 'jett.ion
 .run(function($ionicPlatform,$rootScope,$timeout,$state, $ionicLoading, Recipes,$ImageCacheFactory) {
   $rootScope.appReady = {status:false};
   $ionicPlatform.ready(function() {
-    var deploy = new Ionic.Deploy();
+  //   var deploy = new Ionic.Deploy();
+  //   var hasUpdate = false;
+  // // Check Ionic Deploy for new code
+  // checkForUpdates = function() {
+  //   console.log('Ionic Deploy: Checking for updates');
+  //   deploy.check().then(function(info) {
+  //     console.log('Ionic Deploy: Update available: ' + info);
+  //     hasUpdate = true;
+  //   }, function(err) {
+  //     console.error('Ionic Deploy: Unable to check for updates', err);
+  //   });
+  // };
+  // // Update app code with new release from Ionic Deploy
+  // doUpdate = function() {
+  //   deploy.update().then(function(res) {
+  //     console.log('Ionic Deploy: Update Success! ', res);
+  //   }, function(err) {
+  //     console.log('Ionic Deploy: Update error! ', err);
+  //   }, function(prog) {
+  //     console.log('Ionic Deploy: Progress... ', prog);
+  //   });
+  // };
+
+  // checkForUpdates();
+
+
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     //Cache all images on app load

@@ -2,9 +2,7 @@
  <ion-view view-title="Favorites" cache-view="false">
   <ion-content>
       <div ng-repeat="food in info | unique: 'Name'">
-          <div ng-if="!food">
-            NO favorites
-          </div>
+          <h1 ng-if="!food.Name">NO Favorties</h1>
             <div class="food-title">
               {{food.Name}}
             </div>
@@ -13,6 +11,9 @@
             <img class="category-img" ng-src="{{food.image_src}}" >
           </a>
         </div>
+      </div>
+      <div ng-show="noFavorites">
+        <img src="category-img" ng-src="img/nofavorites">
       </div>
  </ion-content>
 </ion-view>

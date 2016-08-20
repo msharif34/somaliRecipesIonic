@@ -382,8 +382,6 @@ $scope.credits = {
 })
 
 .controller('FavoritesCtrl', function($scope,$window,Recipes, $ionicLoading,$http) {
-  var ref = new Firebase("https://somali-food-app.firebaseio.com");
-  var authData = ref.getAuth();
   var favoritesFoods = [];
   var currentAccountId;
   if($window.localStorage.currentAccount === 'firebase'){
@@ -415,6 +413,8 @@ $scope.credits = {
                         },
                         data: {firebaseId: currentAccountId}
                         }).success(function (serverInfo) {
+                            if(serverInfo == ''){$scope.noFavorites = true};
+                          console.log('serverInfo', serverInfo)
                           serverInfo.forEach(function(data){
                             favoritesFoods.push(data.foodName)
                           }, function(err){

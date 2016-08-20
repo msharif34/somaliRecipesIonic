@@ -209,7 +209,7 @@ angular.module('jett.ionic.filter.bar', ['ionic']);
         search: 'ion-ios-search-strong',
         backdrop: true,
         transition: 'vertical',
-        placeholder: 'Search Recipes (ex. \'Chappati\')'
+        placeholder: 'Search Recipes (ex. \'Muufo\')'
       });
 
       // iOS (it is the default already)
